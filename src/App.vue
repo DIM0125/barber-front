@@ -10,6 +10,9 @@ import NavMenu from './components/NavMenu.vue'
       <component :is="Component" />
     </transition>
   </RouterView>
+  <div class="footer justify-content-center align-items-center py-3 my-3 container-fluid">
+    <p>© Copyright 2024. Todos os direitos reservados.</p>
+  </div>
 </template>
 
 <style scoped>
@@ -21,5 +24,14 @@ import NavMenu from './components/NavMenu.vue'
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+
+.footer {
+  background-color: #381818;
+  color: white;
+  text-align: center;
+  position: absolute;
+  bottom: 100;
+  margin-top: auto;
 }
 </style>

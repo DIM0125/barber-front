@@ -29,7 +29,7 @@
           <label for="horario">Horário:</label>
           <input type="time" class="form-control" id="horario" required>
         </div>
-        <button type="submit" class="btn btn-primary">Agendar</button>
+        <button type="submit" class="btn btn-warning my-3">Agendar</button>
       </form>
     </div>
   </div>

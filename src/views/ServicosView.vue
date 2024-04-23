@@ -12,7 +12,7 @@
             <div class="card-body">
               <h5 class="card-title">Corte de Cabelo</h5>
               <p class="card-text">Descrição do serviço.</p>
-              <a href="#" class="btn btn-primary">Agendar</a>
+              <a href="#" class="btn btn-warning">Agendar</a>
             </div>
           </div>
         </div>
@@ -26,7 +26,7 @@
             <div class="card-body">
               <h5 class="card-title">Barba</h5>
               <p class="card-text">Descrição do serviço.</p>
-              <a href="#" class="btn btn-primary">Agendar</a>
+              <a href="#" class="btn btn-warning">Agendar</a>
             </div>
           </div>
         </div>
@@ -41,7 +41,7 @@
             <div class="card-body">
               <h5 class="card-title">Pacote Completo</h5>
               <p class="card-text">Descrição do serviço.</p>
-              <a href="#" class="btn btn-primary">Agendar</a>
+              <a href="#" class="btn btn-warning">Agendar</a>
             </div>
           </div>
         </div>
@@ -54,7 +54,7 @@
             <div class="card-body">
               <h5 class="card-title">Pacote Completo</h5>
               <p class="card-text">Descrição do serviço.</p>
-              <a href="#" class="btn btn-primary">Agendar</a>
+              <a href="#" class="btn btn-warning">Agendar</a>
             </div>
           </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="card-body">
               <h5 class="card-title">Pacote Completo</h5>
               <p class="card-text">Descrição do serviço.</p>
-              <a href="#" class="btn btn-primary">Agendar</a>
+              <a href="#" class="btn btn-warning">Agendar</a>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
             <div class="card-body">
               <h5 class="card-title">Pacote Completo</h5>
               <p class="card-text">Descrição do serviço.</p>
-              <a href="#" class="btn btn-primary">Agendar</a>
+              <a href="#" class="btn btn-warning">Agendar</a>
             </div>
           </div>
         </div>

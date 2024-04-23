@@ -11,7 +11,7 @@
           <label for="senha">Senha:</label>
           <input type="password" class="form-control" id="senha" placeholder="Digite sua senha" required>
         </div>
-        <button type="submit" class="btn btn-primary">Entrar</button>
+        <button type="submit" class="btn btn-warning my-3">Entrar</button>
       </form>
     </div>
   </div>
