@@ -1,34 +1,25 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
+import NavMenu from './components/NavMenu.vue'
 </script>
 
 <template>
-  <header>
-    <div class="navbar">
-      <nav>
-        <RouterLink to="/">Início</RouterLink>
-        <RouterLink to="/servicos">Serviços</RouterLink>
-        <RouterLink to="/agendamento">Agendamento</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
+  <NavMenu />
+  <RouterView v-slot="{ Component }">
+    <transition name="fade" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </RouterView>
 </template>
 
 <style scoped>
-.navbar {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  background-color: #fafafa;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
 }
 
-nav {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
