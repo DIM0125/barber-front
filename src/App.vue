@@ -11,7 +11,18 @@ import NavMenu from './components/NavMenu.vue'
     </transition>
   </RouterView>
   <div class="footer justify-content-center align-items-center py-3 my-3 container-fluid">
-    <p>© Copyright 2024. Todos os direitos reservados.</p>
+    <p>Toca da Barba © Copyright 2024. Todos os direitos reservados.</p>
+    <div class="d-flex justify-content-center gap-3">
+
+      <router-link to="/area-do-cliente" class="footer-link">Área do Cliente</router-link>
+
+      <router-link to="/area-do-gerente" class="footer-link">Área do Gerente</router-link>
+
+      <router-link to="/area-do-barbeiro" class="footer-link">Área do Barbeiro</router-link>
+
+      <router-link to="/area-do-recepcionista" class="footer-link">Área do Recepcionista</router-link>
+
+    </div>
   </div>
 </template>
 
@@ -33,5 +44,14 @@ import NavMenu from './components/NavMenu.vue'
   position: absolute;
   bottom: 100;
   margin-top: auto;
+}
+
+.footer-link {
+  text-decoration: none;
+  color: white;
+}
+
+.footer-link:hover {
+  text-decoration: underline;
 }
 </style>
