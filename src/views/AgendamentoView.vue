@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center">Página de Agendamentos</h1>
+    <h1 class="text-center">Realize seu agendamento</h1>
     <div class="container w-50">
       <form>
         <div class="form-group">

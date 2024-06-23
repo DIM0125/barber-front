@@ -12,9 +12,9 @@ const handleLogin = () => {
 </script>
 
 <template>
-  <div>
+  <div class="d-flex align-items-center">
     <div class="container">
-      <h1 class="text-center">Página de Login</h1>
+      <h1 class="text-center">Login</h1>
       <form class="row justify-content-center" @submit.prevent="handleLogin()">
         <div class="col col-md-5">
           <div class="mt-3">
