@@ -1,20 +1,20 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import api from '../../services/api.js';
+import { useAuthStore } from '../../stores/AuthStore';
 
-const currentUser = 19;
 const novoProduto = reactive({
     nome: '',
     quantidade_estoque: 0,
     quantidade_minima: 0,
     descricao: '',
-    modificado_por: currentUser
+    modificado_por: useAuthStore().userData.id_usuario
 })
 
 const errorMessage = ref('')
 
 const handleSubmit = () => {
-    api.post('/produtos', novoProduto)
+    api.post('/products', novoProduto)
         .then(() => {
             window.location.reload();
         })
@@ -54,6 +54,17 @@ const handleSubmit = () => {
                             <label for="descricao">Descricão:</label>
                             <textarea class="form-control" id="descricao" rows="3" v-model="novoProduto.descricao"
                                 required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-8">
+                                Qual a quantidade mínima desse item no estoque?
+                            </div>
+                            <div class="col-4">
+                                <input type="number" class="form-control" id="quantidade_minima"
+                                    v-model="novoProduto.quantidade_minima" min="0"
+                                    @keyup="novoProduto.quantidade_minima = Math.abs(novoProduto.quantidade_minima)">
+                            </div>
                         </div>
 
                         <div class="text-danger text-center m-2">{{ errorMessage }}</div>

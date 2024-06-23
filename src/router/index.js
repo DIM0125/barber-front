@@ -14,13 +14,20 @@ import PaginaInicialGerenteView from '@/views/Gerente/PaginaInicialGerenteView.v
 import PaginaInicialRecepcionistaView from '@/views/Recepcionista/PaginaInicialRecepcionistaView.vue'
 import FuncionariosView from '@/views/Gerente/FuncionariosView.vue'
 import EstoqueView from '@/views/Gerente/EstoqueView.vue'
+import { useAuthStore } from '@/stores/AuthStore'
+import FinanceiroView from '@/views/Gerente/FinanceiroView.vue'
+import AgendamentosBarbeiroView from '@/views/Barbeiro/AgendamentosBarbeiroView.vue'
+import ServicosBarbeiroView from '@/views/Barbeiro/ServicosBarbeiroView.vue'
+import HorariosBarbeiroView from '@/views/Barbeiro/HorariosBarbeiroView.vue'
+import UnauthorizedAccessView from '@/views/UnauthorizedAccessView.vue'
+import AgendamentosClienteView from '@/views/Cliente/AgendamentosClienteView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
-      name: '',
+      name: 'index',
       component: HomeView
     },
     {
@@ -48,6 +55,11 @@ const router = createRouter({
           path: 'inicio',
           name: 'cliente-inicio',
           component: PaginaInicialClienteView
+        },
+        {
+          path: 'agendamentos',
+          name: 'cliente-agendamentos',
+          component: AgendamentosClienteView
         }
       ]
     },
@@ -61,6 +73,21 @@ const router = createRouter({
           path: 'inicio',
           name: 'barbeiro-inicio',
           component: PaginaInicialBarbeiroView
+        },
+        {
+          path: 'agendamentos',
+          name: 'barbeiro-agendamentos',
+          component: AgendamentosBarbeiroView
+        },
+        {
+          path: 'servicos',
+          name: 'barbeiro-servicos',
+          component: ServicosBarbeiroView
+        },
+        {
+          path: 'horarios',
+          name: 'barbeiro-horarios',
+          component: HorariosBarbeiroView
         }
       ]
     },
@@ -84,6 +111,11 @@ const router = createRouter({
           path: 'estoque',
           name: 'gerente-estoque',
           component: EstoqueView
+        },
+        {
+          path: 'financeiro',
+          name: 'gerente-financeiro',
+          component: FinanceiroView
         }
       ]
     },
@@ -99,8 +131,40 @@ const router = createRouter({
           component: PaginaInicialRecepcionistaView
         }
       ]
+    },
+    {
+      path: '/unauthorized',
+      name: 'unauthorized',
+      component: UnauthorizedAccessView
     }
   ]
+})
+
+router.beforeEach(async (to) => {
+  const publicPages = ['index', 'servicos', 'login', 'cadastro']
+  const authRequired = !publicPages.includes(to.name)
+  let userRole
+  if (useAuthStore().isAuthenticated) {
+    userRole = useAuthStore().userData.role
+  }
+
+  if (to.name === 'login' && useAuthStore().isAuthenticated) {
+    return { name: 'index' }
+  }
+
+  if (authRequired) {
+    if (!useAuthStore().isAuthenticated) {
+      return { name: 'login' }
+    } else if (to.name.includes('cliente') && userRole !== 'CLIENT') {
+      return { name: 'unauthorized' }
+    } else if (to.name.includes('gerente') && userRole !== 'MANAGER') {
+      return { name: 'unauthorized' }
+    } else if (to.name.includes('barbeiro') && userRole !== 'BARBER') {
+      return { name: 'unauthorized' }
+    } else if (to.name.includes('recepcionista') && userRole !== 'RECEPT') {
+      return { name: 'unauthorized' }
+    }
+  }
 })
 
 export default router

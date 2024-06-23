@@ -1,5 +1,12 @@
 <script setup>
 
+import { useAuthStore } from "../../stores/AuthStore";
+
+const handleLogout = () => {
+    if (confirm("Tem certeza que deseja sair?")) {
+        useAuthStore().logout();
+    }
+}
 </script>
 
 <template>
@@ -12,6 +19,9 @@
                     Funcionários</router-link>
                 <router-link to="/area-do-gerente/estoque" class="menu-link" active-class="menu-link-active">|
                     Estoque</router-link>
+                <router-link to="/area-do-gerente/financeiro" class="menu-link" active-class="menu-link-active">|
+                    Financeiro</router-link>
+                <div class="menu-link" @click="handleLogout()">| Log-out</div>
             </div>
         </div>
         <div class="col col-md-9">
@@ -31,6 +41,11 @@
                             class="bi bi-people-fill me-1"></i>Funcionários</router-link>
                     <router-link to="/area-do-gerente/estoque" class="mobile-menu-link"
                         active-class="mobile-menu-link-active"><i class="bi bi-box-seam-fill"></i>Estoque</router-link>
+                    <router-link to="/area-do-gerente/financeiro" class="mobile-menu-link"
+                        active-class="mobile-menu-link-active"><i
+                            class="bi bi-currency-dollar"></i>Financeiro</router-link>
+                    <div class="mobile-menu-link" @click="handleLogout()"><i class="bi bi-box-arrow-left"></i>Log-out
+                    </div>
                 </div>
             </div>
         </div>
@@ -47,6 +62,7 @@
     color: #212121;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .menu-link:hover {

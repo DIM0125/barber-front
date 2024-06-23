@@ -1,5 +1,12 @@
 <script setup>
 import { RouterLink } from 'vue-router';
+import { useAuthStore } from '../stores/AuthStore';
+
+const handleLogout = () => {
+    if (confirm("Tem certeza que deseja sair?")) {
+        useAuthStore().logout();
+    }
+}
 
 </script>
 
@@ -16,8 +23,24 @@ import { RouterLink } from 'vue-router';
                 <div class="navbar-nav">
                     <RouterLink class="nav-link" to="/">Home</RouterLink>
                     <RouterLink class="nav-link" to="/servicos">Serviços</RouterLink>
-                    <RouterLink class="nav-link" to="/login">Login</RouterLink>
-                    <RouterLink class="nav-link" to="/cadastro">Cadastro</RouterLink>
+                    <RouterLink v-if="!useAuthStore().isAuthenticated" class="nav-link" to="/login">Login</RouterLink>
+                    <RouterLink v-if="!useAuthStore().isAuthenticated" class="nav-link" to="/cadastro">Cadastro
+                    </RouterLink>
+                    <RouterLink v-if="useAuthStore().isAuthenticated && useAuthStore().userData.role === 'CLIENT'"
+                        class="nav-link" to="/area-do-cliente">
+                        Área do Cliente</RouterLink>
+                    <RouterLink v-if="useAuthStore().isAuthenticated && useAuthStore().userData.role === 'BARBER'"
+                        class="nav-link" to="/area-do-barbeiro">
+                        Área do Barbeiro</RouterLink>
+                    <RouterLink v-if="useAuthStore().isAuthenticated && useAuthStore().userData.role === 'RECEPT'"
+                        class="nav-link" to="/area-do-recepcionista">
+                        Área do Recepcionista</RouterLink>
+                    <RouterLink v-if="useAuthStore().isAuthenticated && useAuthStore().userData.role === 'MANAGER'"
+                        class="nav-link" to="/area-do-gerente">
+                        Área do Gerente</RouterLink>
+                    <RouterLink v-if="useAuthStore().isAuthenticated" class="nav-link" @click="handleLogout()" to="">
+                        Logout</RouterLink>
+
                 </div>
             </div>
         </div>

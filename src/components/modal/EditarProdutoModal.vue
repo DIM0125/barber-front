@@ -1,8 +1,9 @@
 <script setup>
 import { watch, ref, reactive } from 'vue'
 import api from '../../services/api.js';
+import { useAuthStore } from '../../stores/AuthStore';
 
-const { produto } = defineProps(['produto', 'handleEditarProduto'])
+const { produto } = defineProps(['produto'])
 
 const copiaProduto = reactive(produto);
 const errorMessage = ref('');
@@ -29,7 +30,9 @@ const handleAlteracoes = () => {
         return;
     }
 
-    api.put(`/produtos/${copiaProduto.id_produto}`, produtoAlterado)
+    produtoAlterado.modificado_por = useAuthStore().userData.id_usuario
+
+    api.put(`/products/${copiaProduto.id_produto}`, produtoAlterado)
         .then(() => {
             window.location.reload();
         })
@@ -76,12 +79,13 @@ const handleAlteracoes = () => {
                             <div class="col-6">
                                 <label for="ultima-modificacao">Última Modificação:</label>
                                 <input type="text" class="form-control" id="ultima-modificacao"
-                                    v-model="copiaProduto.data_ultima_modificacao" disabled>
+                                    :value="new Date(copiaProduto.data_ultima_modificacao).toLocaleString('pt-br')"
+                                    disabled>
                             </div>
                             <div class="col-6">
                                 <label for="modificado-por">Modificado por:</label>
                                 <input type="text" class="form-control" id="modificado-por"
-                                    v-model="copiaProduto.modificado_por" disabled>
+                                    :value="copiaProduto.modificado_por" disabled>
                             </div>
                         </div>
 

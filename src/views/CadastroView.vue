@@ -9,6 +9,7 @@ const cadastroForm = reactive({
     email: '',
     telefone: '',
     senha: '',
+    role: 'CLIENT'
 })
 
 const senhaConfirmacao = ref('');
@@ -61,13 +62,13 @@ const handleSubmit = async () => {
     }
 
     try {
-        const response = await api.post('/usuarios/cliente', cadastroForm);
+        const response = await api.post('/users/client', cadastroForm);
         if (response.status === 201) {
             cadastrado.value = true;
         }
     } catch (error) {
-        if (error.response.data.error) {
-            errors.value = error.response.data.error;
+        if (error?.response?.data?.error) {
+            errors.value.push(error?.response?.data?.error);
         }
         else {
             errors.value = ["Ocorreu um erro! Tente novamente mais tarde."];

@@ -9,7 +9,7 @@ const loading = ref(true);
 const found = ref(false);
 
 onBeforeMount(() => {
-    api.get('/produtos')
+    api.get('/products')
         .then(response => {
             estoque.value = response.data.data;
             loading.value = false;
@@ -28,7 +28,7 @@ const handleExcluirProduto = (id) => {
         return;
     }
 
-    api.delete(`/produtos/${id}`)
+    api.delete(`/products/${id}`)
         .then(() => {
             estoque.value = estoque.value.filter(item => item.id_produto !== id);
         })
@@ -56,7 +56,7 @@ const handleExcluirProduto = (id) => {
 
         <div v-else>
 
-            <div v-if="found">
+            <div v-if="found && estoque.value.length > 0">
                 <table class="table table-hover">
                     <thead>
                         <tr>
