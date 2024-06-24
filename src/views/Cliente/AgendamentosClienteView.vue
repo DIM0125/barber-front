@@ -1,6 +1,7 @@
 <script setup>
 import api from '../../services/api.js'
 import { onBeforeMount, ref } from 'vue'
+import dayjs from 'dayjs'
 
 const agendamentos = ref([])
 const loading = ref(true)
@@ -20,6 +21,10 @@ onBeforeMount(() => {
       found.value = false
     })
 })
+
+const formatDate = (dateString) => {
+  return dayjs(dateString).format('DD/MM/YYYY HH:mm')
+}
 </script>
 
 <template>
@@ -33,10 +38,10 @@ onBeforeMount(() => {
         <router-link :to="{ name: 'servicos' }" class="btn btn-primary mb-4">Novo Agendamento</router-link>
       </div>
       <div class="col-12">
-        <div class="card" v-for="agendamento in agendamentos" :key="agendamento.id">
+        <div class="card mb-2" v-for="agendamento in agendamentos" :key="agendamento.id">
           <div class="card-body">
             <h5 class="card-title">{{ agendamento.servico }}</h5>
-            <p class="card-text">{{ agendamento.data }} - {{ agendamento.horario }}</p>
+            <p class="card-text">{{ formatDate(agendamento.horario_agendamento)  }}</p>
             <p class="card-text">{{ agendamento.status }}</p>
           </div>
         </div>
