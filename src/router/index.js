@@ -21,6 +21,7 @@ import ServicosBarbeiroView from '@/views/Barbeiro/ServicosBarbeiroView.vue'
 import HorariosBarbeiroView from '@/views/Barbeiro/HorariosBarbeiroView.vue'
 import UnauthorizedAccessView from '@/views/UnauthorizedAccessView.vue'
 import AgendamentosClienteView from '@/views/Cliente/AgendamentosClienteView.vue'
+import ServicosGerenteView from '@/views/Gerente/ServicosGerenteView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -116,6 +117,11 @@ const router = createRouter({
           path: 'financeiro',
           name: 'gerente-financeiro',
           component: FinanceiroView
+        },
+        {
+          path: 'servicos',
+          name: 'gerente-servicos',
+          component: ServicosGerenteView
         }
       ]
     },

@@ -35,6 +35,7 @@ onBeforeMount(() => {
             <div class="card-body">
               <h5 class="card-title">{{ service.nome }}</h5>
               <p class="card-text">{{ service.descricao }}</p>
+              <p class="card-text">R$ {{ service.preco }}</p>
               <a class="btn btn-warning">Agendar</a>
             </div>
           </div>

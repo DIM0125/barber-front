@@ -21,6 +21,8 @@ const handleLogout = () => {
                     Estoque</router-link>
                 <router-link to="/area-do-gerente/financeiro" class="menu-link" active-class="menu-link-active">|
                     Financeiro</router-link>
+                <router-link to="/area-do-gerente/servicos" class="menu-link" active-class="menu-link-active">| Serviços
+                </router-link>
                 <div class="menu-link" @click="handleLogout()">| Log-out</div>
             </div>
         </div>

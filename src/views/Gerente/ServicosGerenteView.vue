@@ -1,17 +1,17 @@
 <script setup>
 import api from '../../services/api.js';
 import { ref, reactive, onBeforeMount } from 'vue';
-import EditarProdutoModal from '../../components/modal/EditarProdutoModal.vue';
-import AdicionarProdutoModal from '../../components/modal/AdicionarProdutoModal.vue';
+import AdicionarServicoModal from '../../components/modal/AdicionarServicoModal.vue';
+import EditarServicoModal from '../../components/modal/EditarServicoModal.vue';
 
-const estoque = reactive({})
+const servicos = reactive({})
 const loading = ref(true);
 const found = ref(false);
 
 onBeforeMount(() => {
-    api.get('/products')
+    api.get('/servicos')
         .then(response => {
-            estoque.value = response.data.data;
+            servicos.value = response.data.data;
             loading.value = false;
             found.value = true;
         })
@@ -22,15 +22,15 @@ onBeforeMount(() => {
         })
 })
 
-const handleExcluirProduto = (id) => {
+const handleExcluirServico = (id) => {
 
-    if (!confirm("Tem certeza que deseja excluir este item?")) {
+    if (!confirm("Tem certeza que deseja excluir este serviço?")) {
         return;
     }
 
-    api.delete(`/products/${id}`)
+    api.delete(`/servicos/${id}`)
         .then(() => {
-            estoque.value = estoque.value.filter(item => item.id_produto !== id);
+            servicos.value = servicos.value.filter(servico => servico.id_servico !== id);
         })
         .catch(error => {
             console.log(error);
@@ -42,12 +42,12 @@ const handleExcluirProduto = (id) => {
     <div>
         <div>
             <div class="d-flex align-items-center justify-content-between">
-                <h1>Estoque</h1>
-                <div class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#novoProdutoModal">Adicionar Produto
+                <h1>Serviços Oferecidos pela Barbearia</h1>
+                <div class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#novoServicoModal">Adicionar Serviço
                 </div>
             </div>
 
-            <AdicionarProdutoModal />
+            <AdicionarServicoModal />
         </div>
 
         <div v-if="loading">
@@ -56,38 +56,35 @@ const handleExcluirProduto = (id) => {
 
         <div v-else>
 
-            <div v-if="found && estoque.value.length > 0">
+            <div v-if="found && servicos.value.length > 0">
                 <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>Nome</th>
-                            <th>Quantidade</th>
-                            <th>Modificado por</th>
-                            <th>Última modificação</th>
+                            <th>Descrição</th>
+                            <th>Duração Estimada (min)</th>
+                            <th>Valor</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in estoque.value" :key="item.id_produto">
-                            <td>{{ item.nome }}</td>
-
-                            <td>{{ item.quantidade_estoque }}
-                                <span v-if="item.quantidade_estoque <= item.quantidade_minima" title="Estoque baixo"><i
-                                        class="bi bi-exclamation-triangle-fill text-warning"></i></span>
-                            </td>
-                            <td>{{ item.modificado_por }}</td>
-                            <td>{{ new Date(item.data_ultima_modificacao).toLocaleDateString('pt-br') }}</td>
+                        <tr v-for="servico in servicos.value" :key="servico.id_servico">
+                            <td>{{ servico.nome }}</td>
+                            <td>{{ servico.descricao }}</td>
+                            <td>{{ servico.duracao_estimada }}</td>
+                            <td>{{ servico.preco }}</td>
                             <td>
                                 <button class="btn btn-outline-warning mx-1" title="Editar" data-bs-toggle="modal"
-                                    :data-bs-target="'#editarProdutoModal' + item.id_produto">
+                                    :data-bs-target="'#editarServicoModal' + servico.id_servico">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
 
                                 <button class="btn btn-outline-danger mx-1" title="Excluir"
-                                    @click="handleExcluirProduto(item.id_produto)"><i class="bi bi-trash"></i></button>
+                                    @click="handleExcluirServico(servico.id_servico)"><i
+                                        class="bi bi-trash"></i></button>
                             </td>
 
-                            <EditarProdutoModal :produto="item" />
+                            <EditarServicoModal :servico="servico" />
                         </tr>
                     </tbody>
                 </table>
