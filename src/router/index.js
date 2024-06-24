@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import ServicosView from '@/views/ServicosView.vue'
-// import AgendamentoView from '@/views/AgendamentoView.vue'
+import AgendamentoView from '@/views/AgendamentoView.vue'
 import CadastroView from '@/views/CadastroView.vue'
 import DashboardClienteView from '@/views/Cliente/DashboardClienteView.vue'
 import DashboardBarbeiroView from '@/views/Barbeiro/DashboardBarbeiroView.vue'
@@ -61,6 +61,12 @@ const router = createRouter({
           path: 'agendamentos',
           name: 'cliente-agendamentos',
           component: AgendamentosClienteView
+        },
+        {
+          path: 'agendamento/novo',
+          name: 'cliente-novo-agendamento',
+          component: AgendamentoView,
+          props: route => ({ selectedService: route.query.service })
         }
       ]
     },
