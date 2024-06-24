@@ -22,6 +22,7 @@ import HorariosBarbeiroView from '@/views/Barbeiro/HorariosBarbeiroView.vue'
 import UnauthorizedAccessView from '@/views/UnauthorizedAccessView.vue'
 import AgendamentosClienteView from '@/views/Cliente/AgendamentosClienteView.vue'
 import ServicosGerenteView from '@/views/Gerente/ServicosGerenteView.vue'
+import AgendamentosRecepcionistaView from '@/views/Recepcionista/AgendamentosRecepcionistaView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,7 +67,7 @@ const router = createRouter({
           path: 'agendamento/novo',
           name: 'cliente-novo-agendamento',
           component: AgendamentoView,
-          props: route => ({ selectedService: route.query.service })
+          props: (route) => ({ selectedService: route.query.service })
         }
       ]
     },
@@ -141,6 +142,11 @@ const router = createRouter({
           path: 'inicio',
           name: 'recepcionista-inicio',
           component: PaginaInicialRecepcionistaView
+        },
+        {
+          path: 'agendamentos',
+          name: 'recepcionista-agendamentos',
+          component: AgendamentosRecepcionistaView
         }
       ]
     },

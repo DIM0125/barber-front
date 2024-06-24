@@ -5,7 +5,6 @@ import dayjs from 'dayjs'
 
 const props = defineProps(['selectedService'])
 
-const telefone = ref('')
 const servico = ref(props.selectedService || '')
 const barbeiro = ref('')
 const data = ref(new Date().toISOString().split('T')[0])
@@ -160,7 +159,7 @@ const realizarAgendamento = () => {
               <select v-model="servico" class="form-control" id="servico" required>
                 <option value="">Selecione...</option>
                 <option v-for="service in services" :key="service.id_servico" :value="service.id_servico">
-                  {{ service.nome }}
+                  {{ service.nome }} ({{ service.duracao_estimada }} min) - R$ {{ service.valor }}
                 </option>
               </select>
             </div>
@@ -180,20 +179,17 @@ const realizarAgendamento = () => {
             <div class="form-group">
               <label for="data">Data:</label>
               <input v-model="data" type="date" class="form-control" id="data"
-                     v-bind:min="new Date().toISOString().split('T')[0]"
-                     required>
+                v-bind:min="new Date().toISOString().split('T')[0]" required>
             </div>
           </div>
           <div class="col-12 mt-2">
             <div class="row g-2">
-              <div class="col-12 col-md-4" v-for="slot in timeSlots" :key="slot.start">
+              <div class="col-12 col-md-2" v-for="slot in timeSlots" :key="slot.start">
                 <div
-                  :class="['card', { 'bg-warning text-black': isSelected(slot), 'disabled': !isSelected(slot) && selectedSlot }]">
+                  :class="['card', { 'bg-warning text-black': isSelected(slot), 'disabled': !isSelected(slot) && selectedSlot }]"
+                  @click="selectTimeSlot(slot)">
                   <div class="card-body">
-                    <h5 class="card-title">{{ slot.day }}</h5>
                     <p class="card-text">{{ slot.start }}</p>
-                    <button @click="selectTimeSlot(slot)" class="btn btn-secondary">Selecionar
-                    </button>
                   </div>
                 </div>
               </div>

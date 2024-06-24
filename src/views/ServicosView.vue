@@ -34,7 +34,7 @@ onBeforeMount(async () => {
             <div class="card-body">
               <h5 class="card-title">{{ service.nome }}</h5>
               <p class="card-text">{{ service.descricao }}</p>
-              <p class="card-text">R$ {{ service.preco }}</p>
+              <p class="card-text">R$ {{ service.valor }}</p>
               <router-link :to="{ name: 'cliente-novo-agendamento', query: { service: service.id_servico } }"
                 class="btn btn-warning">Agendar</router-link>
             </div>

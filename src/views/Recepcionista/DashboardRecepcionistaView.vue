@@ -13,9 +13,10 @@ const handleLogout = () => {
     <div class="container-xxl row">
         <div class="d-none d-md-block col-3">
             <div class="d-flex flex-column align-items-center">
-                <router-link to="/area-do-cliente/inicio" class="menu-link" active-class="menu-link-active"> |
+                <router-link to="/area-do-recepcionista/inicio" class="menu-link" active-class="menu-link-active"> |
                     Início</router-link>
-                <router-link to="/area-do-cliente/agendamentos" class="menu-link" active-class="menu-link-active"> |
+                <router-link to="/area-do-recepcionista/agendamentos" class="menu-link" active-class="menu-link-active">
+                    |
                     Agendamentos</router-link>
                 <div class="menu-link" @click="handleLogout()">| Log-out</div>
             </div>
@@ -30,10 +31,10 @@ const handleLogout = () => {
         <div class="d-md-none fixed-bottom my-2">
             <div class="mobile-menu container-fluid">
                 <div class="d-flex justify-content-between">
-                    <router-link to="/area-do-cliente/inicio" class="mobile-menu-link"
+                    <router-link to="/area-do-recepcionista/inicio" class="mobile-menu-link"
                         active-class="mobile-menu-link-active"><i class="bi bi-house-fill me-1"></i>Início</router-link>
 
-                    <router-link to="/area-do-cliente/agendamentos" class="mobile-menu-link"
+                    <router-link to="/area-do-recepcionista/agendamentos" class="mobile-menu-link"
                         active-class="mobile-menu-link-active"><i
                             class="bi bi-calendar-event-fill me-1"></i>Agendamentos</router-link>
 
