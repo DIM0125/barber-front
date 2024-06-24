@@ -43,7 +43,7 @@ const fetchAgendamentos = async () => {
             }));
 
         agendamentosFinalizados.value = agendamentos.value
-            .filter(agendamento => agendamento.status === 'Finalizado')
+            .filter(agendamento => agendamento.status === 'Finalizado' || agendamento.status === 'Cancelado')
             .map(agendamento => ({
                 ...agendamento,
                 cliente: agendamento.cliente ? agendamento.cliente.nome : 'Cliente desconhecido'
