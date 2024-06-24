@@ -6,13 +6,12 @@ const services = ref([])
 const loading = ref(true)
 const found = ref(false)
 
-onBeforeMount(() => {
-  api.get('/servicos')
+onBeforeMount(async () => {
+  await api.get('/servicos')
     .then(response => {
       services.value = response.data.data
       loading.value = false
       found.value = true
-      console.log(services.value)
     })
     .catch(error => {
       console.log(error)
@@ -35,7 +34,7 @@ onBeforeMount(() => {
             <div class="card-body">
               <h5 class="card-title">{{ service.nome }}</h5>
               <p class="card-text">{{ service.descricao }}</p>
-              <p class="card-text">R$ {{ service.preco }}</p>
+              <p class="card-text">R$ {{ service.valor.toFixed(2) }}</p>
               <a class="btn btn-warning">Agendar</a>
             </div>
           </div>

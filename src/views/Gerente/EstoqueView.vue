@@ -8,8 +8,8 @@ const estoque = reactive({})
 const loading = ref(true);
 const found = ref(false);
 
-onBeforeMount(() => {
-    api.get('/products')
+onBeforeMount(async () => {
+    await api.get('/products')
         .then(response => {
             estoque.value = response.data.data;
             loading.value = false;

@@ -13,8 +13,8 @@ const novoProduto = reactive({
 
 const errorMessage = ref('')
 
-const handleSubmit = () => {
-    api.post('/products', novoProduto)
+const handleSubmit = async () => {
+    await api.post('/products', novoProduto)
         .then(() => {
             window.location.reload();
         })

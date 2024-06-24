@@ -26,8 +26,8 @@ const diasDaSemana = ref(new Map([
     ['Domingo', 'DOMINGO']
 ]))
 
-onBeforeMount(() => {
-    api.get(`/barber/${useAuthStore().userData.id_usuario}/work-schedule`)
+onBeforeMount(async () => {
+    await api.get(`/barber/${useAuthStore().userData.id_usuario}/work-schedule`)
         .then(response => {
             horarios.value = response.data.data
 

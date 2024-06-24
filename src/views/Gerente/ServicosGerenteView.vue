@@ -8,8 +8,8 @@ const servicos = reactive({})
 const loading = ref(true);
 const found = ref(false);
 
-onBeforeMount(() => {
-    api.get('/servicos')
+onBeforeMount(async () => {
+    await api.get('/servicos')
         .then(response => {
             servicos.value = response.data.data;
             loading.value = false;
@@ -22,13 +22,13 @@ onBeforeMount(() => {
         })
 })
 
-const handleExcluirServico = (id) => {
+const handleExcluirServico = async (id) => {
 
     if (!confirm("Tem certeza que deseja excluir este serviço?")) {
         return;
     }
 
-    api.delete(`/servicos/${id}`)
+    await api.delete(`/servicos/${id}`)
         .then(() => {
             servicos.value = servicos.value.filter(servico => servico.id_servico !== id);
         })
@@ -72,7 +72,7 @@ const handleExcluirServico = (id) => {
                             <td>{{ servico.nome }}</td>
                             <td>{{ servico.descricao }}</td>
                             <td>{{ servico.duracao_estimada }}</td>
-                            <td>{{ servico.preco }}</td>
+                            <td>R$ {{ servico.valor }}</td>
                             <td>
                                 <button class="btn btn-outline-warning mx-1" title="Editar" data-bs-toggle="modal"
                                     :data-bs-target="'#editarServicoModal' + servico.id_servico">

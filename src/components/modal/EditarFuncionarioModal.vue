@@ -50,7 +50,7 @@ const validarAlteracoes = () => {
     return errors;
 }
 
-const handleAlteracoes = () => {
+const handleAlteracoes = async () => {
     errors.value = validarAlteracoes();
 
     if (!funcionarioFoiAlterado.value) {
@@ -64,7 +64,7 @@ const handleAlteracoes = () => {
 
     funcionarioAlterado.role = copiafuncionario.role;
 
-    api.put(`/users/${copiafuncionario.id_usuario}`, funcionarioAlterado)
+    await api.put(`/users/${copiafuncionario.id_usuario}`, funcionarioAlterado)
         .then(() => {
             window.location.reload();
         })

@@ -11,10 +11,12 @@ const novoServico = reactive({
 
 const errorMessage = ref('')
 
-const handleSubmit = () => {
-    api.post('/servicos', novoServico)
-        .then(() => {
-            window.location.reload();
+const handleSubmit = async () => {
+    await api.post('/servicos', novoServico)
+        .then(async (response) => {
+            if (response.data.success) {
+                location.reload()
+            }
         })
         .catch(error => {
             errorMessage.value = "Houve um erro ao adicionar o serviço. Tente novamente mais tarde."

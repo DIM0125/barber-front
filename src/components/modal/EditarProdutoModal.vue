@@ -22,7 +22,7 @@ watch(copiaProduto, (newValue) => {
     errorMessage.value = '';
 }, { deep: true });
 
-const handleAlteracoes = () => {
+const handleAlteracoes = async () => {
     errorMessage.value = '';
 
     if (!produtoFoiAlterado.value) {
@@ -32,7 +32,7 @@ const handleAlteracoes = () => {
 
     produtoAlterado.modificado_por = useAuthStore().userData.id_usuario
 
-    api.put(`/products/${copiaProduto.id_produto}`, produtoAlterado)
+    await api.put(`/products/${copiaProduto.id_produto}`, produtoAlterado)
         .then(() => {
             window.location.reload();
         })

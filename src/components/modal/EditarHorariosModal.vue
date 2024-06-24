@@ -14,8 +14,8 @@ const novoHorario = reactive({
 
 const errorMessage = ref('')
 
-const handleNovoHorario = () => {
-    api.post('/barber/add-work-schedule', novoHorario)
+const handleNovoHorario = async () => {
+    await api.post('/barber/add-work-schedule', novoHorario)
         .then(() => {
             window.location.reload();
         })
@@ -25,8 +25,8 @@ const handleNovoHorario = () => {
         })
 }
 
-const handleExcluirHorario = (id) => {
-    api.delete(`/barber/${useAuthStore().userData.id_usuario}/work-schedule/${id}`)
+const handleExcluirHorario = async (id) => {
+    await api.delete(`/barber/${useAuthStore().userData.id_usuario}/work-schedule/${id}`)
         .then(() => {
             window.location.reload();
         })

@@ -21,7 +21,7 @@ watch(copiaServico, (newValue) => {
     errorMessage.value = '';
 }, { deep: true });
 
-const handleAlteracoes = () => {
+const handleAlteracoes = async () => {
     errorMessage.value = '';
 
     if (!servicoFoiAlterado.value) {
@@ -29,15 +29,18 @@ const handleAlteracoes = () => {
         return;
     }
 
-    api.put(`/servicos/${copiaServico.id_servico}`, servicoAlterado)
-        .then(() => {
-            window.location.reload();
+    servicoAlterado.id_preco = copiaServico.id_preco;
+
+    await api.put(`/servicos/${copiaServico.id_servico}`, servicoAlterado)
+        .then((response) => {
+            if (response.data.success) {
+                window.location.reload();
+            }
         })
-        .catch(error => {
-            errorMessage.value = "Houve um erro ao editar o item. Tente novamente mais tarde.";
+        .catch((error) => {
+            errorMessage.value = "Houve um erro ao editar o serviço. Tente novamente mais tarde.";
             console.log(error);
         })
-
 }
 </script>
 
@@ -74,12 +77,12 @@ const handleAlteracoes = () => {
 
                         <div class="row">
                             <div class="col-8">
-                                Valor do Serviço: R$ {{ copiaServico.preco }}
+                                Valor do Serviço: R$ {{ copiaServico.valor }}
                             </div>
                             <div class="col-4">
-                                <input type="number" class="form-control" id="preco" step="0.01"
-                                    v-model="copiaServico.preco" min="0"
-                                    @keyup="copiaServico.preco = Math.abs(copiaServico.preco); copiaServico.preco = copiaServico.preco.toFixed(2)">
+                                <input type="number" class="form-control" id="quantidade" step="0.01"
+                                    v-model="copiaServico.valor" min="0"
+                                    @keyup="copiaServico.valor = Math.abs(copiaServico.valor)" required>
                             </div>
                         </div>
 
