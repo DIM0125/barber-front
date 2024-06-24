@@ -18,8 +18,6 @@ const fetchAgendamentos = async () => {
         const response = await api.get('/agendamentos');
         agendamentos.value = response.data.data;
 
-        console.log('Dados recebidos da API:', response.data.data);
-
         const today = new Date().toISOString().split('T')[0];
 
         agendamentosHoje.value = agendamentos.value
