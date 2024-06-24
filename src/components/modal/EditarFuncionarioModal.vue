@@ -131,13 +131,12 @@ const checkCpfMask = (cpf) => {
                             <div class="row mt-0 mt-md-3">
                                 <div class="col-md mt-3 mt-md-0">
                                     <label for="nome">Nome:</label>
-                                    <input type="text" class="form-control" id="nome" v-model="copiafuncionario.nome"
+                                    <input type="text" class="form-control" v-model="copiafuncionario.nome"
                                         placeholder="Digite seu nome" required>
                                 </div>
                                 <div class="col col-md">
                                     <label for="tipoFuncionario">Tipo de Funcionário: </label>
-                                    <select class="form-select" :value="copiafuncionario.role" id="tipoFuncionario"
-                                        disabled>
+                                    <select class="form-select" :value="copiafuncionario.role" disabled>
                                         <option value="MANAGER">Gerente</option>
                                         <option value="BARBER">Barbeiro</option>
                                         <option value="RECEPT">Recepcionista</option>
@@ -147,12 +146,12 @@ const checkCpfMask = (cpf) => {
                             <div class="row mt-0 mt-md-3">
                                 <div class="col-md mt-3 mt-md-0">
                                     <label for="email">Email:</label>
-                                    <input type="email" class="form-control" id="email" v-model="copiafuncionario.email"
+                                    <input type="email" class="form-control" v-model="copiafuncionario.email"
                                         placeholder="@exemplo.com" required>
                                 </div>
                                 <div class="col-md mt-3 mt-md-0">
                                     <label for="telefone">Telefone:</label>
-                                    <input type="tel" maxlength="15" class="form-control" id="telefone"
+                                    <input type="tel" maxlength="15" class="form-control"
                                         v-model="copiafuncionario.telefone" placeholder="(xx) xxxxx-xxxx"
                                         @beforeinput="handleTelefoneMask" @blur="handleTelefoneMask" required>
                                 </div>
@@ -161,13 +160,13 @@ const checkCpfMask = (cpf) => {
                             <div class="row mt-0 mt-md-3">
                                 <div class="col-md mt-3 mt-md-0">
                                     <label for="cpf">CPF:</label>
-                                    <input type="text" class="form-control" id="cpf" v-model="copiafuncionario.cpf"
+                                    <input type="text" class="form-control" v-model="copiafuncionario.cpf"
                                         placeholder="000.000.000-00" maxlength="14" @beforeinput="handleCpfMask"
                                         @blur="handleCpfMask" required>
                                 </div>
                                 <div class="col-md mt-3 mt-md-0">
                                     <label for="data_contratacao">Data de Contratação:</label>
-                                    <input type="date" class="form-control" id="data_contratacao"
+                                    <input type="date" class="form-control"
                                         :value="new Date(copiafuncionario.data_contratacao).toISOString().split('T')[0]"
                                         disabled>
                                 </div>

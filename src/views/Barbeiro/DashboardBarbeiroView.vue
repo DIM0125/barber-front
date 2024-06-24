@@ -42,7 +42,8 @@ const handleLogout = () => {
                     <router-link to="/area-do-barbeiro/servicos" class="mobile-menu-link"
                         active-class="mobile-menu-link-active"><i
                             class="bi bi-card-checklist me-1"></i>Serviços</router-link>
-                    <router-link to="/area-do-barbeiro/horarios" class="mobile-menu-link">
+                    <router-link to="/area-do-barbeiro/horarios" class="mobile-menu-link"
+                        active-class="mobile-menu-link-active">
                         <i class="bi bi-clock-fill me-1"></i>Horários
                     </router-link>
                     <div class="mobile-menu-link" @click="handleLogout()"><i class="bi bi-box-arrow-left"></i>Log-out

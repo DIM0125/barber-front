@@ -84,7 +84,7 @@ onBeforeMount(async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="gerente in gerentes.value" :key="gerente.id">
+                        <tr v-for="gerente in gerentes.value" :key="gerente.id_gerente">
                             <td>{{ gerente.nome }}</td>
                             <td>{{ gerente.email }}</td>
                             <td>{{ gerente.telefone }}</td>
@@ -119,7 +119,7 @@ onBeforeMount(async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="barbeiro in barbeiros.value" :key="barbeiro.id">
+                        <tr v-for="barbeiro in barbeiros.value" :key="barbeiro.id_barbeiro">
                             <td>{{ barbeiro.nome }}</td>
                             <td>{{ barbeiro.email }}</td>
                             <td>{{ barbeiro.telefone }}</td>
@@ -154,7 +154,7 @@ onBeforeMount(async () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="recepcionista in recepcionistas.value" :key="recepcionista.id">
+                        <tr v-for="recepcionista in recepcionistas.value" :key="recepcionista.id_recepcionista">
                             <td>{{ recepcionista.nome }}</td>
                             <td>{{ recepcionista.email }}</td>
                             <td>{{ recepcionista.telefone }}</td>
