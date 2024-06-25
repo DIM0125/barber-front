@@ -2,6 +2,7 @@
 import { onBeforeMount, ref, watch } from 'vue'
 import api from '@/services/api.js'
 import dayjs from 'dayjs'
+import router from '@/router'
 
 const props = defineProps(['selectedService'])
 
@@ -134,11 +135,11 @@ const realizarAgendamento = () => {
   api.post('/agendamentos', payload)
     .then(response => {
       console.log(response)
-      alert('Agendamento realizado com sucesso!')
-      servico.value = ''
-      barbeiro.value = ''
-      data.value = new Date().toISOString().split('T')[0]
-      selectedSlot.value = null
+      if (response.data.success) {
+        router.push({ name: 'cliente-agendamentos' });
+      }
+
+      console.log(response);
     })
     .catch(error => {
       console.log(error)

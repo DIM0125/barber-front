@@ -5,9 +5,13 @@ import { ref } from 'vue';
 const authStore = useAuthStore();
 const username = ref('');
 const password = ref('');
+const errorMessage = ref('');
 
-const handleLogin = () => {
-  authStore.login(username.value, password.value);
+const handleLogin = async () => {
+  await authStore.login(username.value, password.value).catch((error) => {
+    errorMessage.value = 'Verifique suas credenciais e tente novamente';
+    console.log(error);
+  });
 }
 </script>
 
@@ -32,6 +36,9 @@ const handleLogin = () => {
             <div class="col col-md-4">
               <button type="submit" class="btn btn-warning w-100 w-md-auto">Login</button>
             </div>
+            <p class="text-danger">
+              {{ errorMessage }}
+            </p>
           </div>
         </div>
       </form>
