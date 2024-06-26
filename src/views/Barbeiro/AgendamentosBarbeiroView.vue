@@ -10,6 +10,7 @@ onMounted(() => {
     api.get('/agendamentos/barbeiro/' + useAuthStore().userData.id_usuario)
         .then(response => {
             agendamentos.value = response.data.data
+            agendamentos.value = agendamentos.value.filter(agendamento => agendamento.status === 'AGENDADO' || agendamento.status === 'CONFIRMADO')
             agendamentosHoje.value = agendamentos.value.filter(agendamento => new Date(agendamento.horario_agendamento).toDateString() === new Date().toDateString())
             agendamentos.value = agendamentos.value.filter(agendamento => !agendamentosHoje.value.includes(agendamento))
         })

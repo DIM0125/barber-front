@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import api from '../../services/api.js';
+import PagamentoModal from '../../components/modal/PagamentoModal.vue';
 
 const loading = ref(0);
 const found = ref(true);
@@ -40,25 +41,6 @@ const fetchAgendamentos = async () => {
         loading.value++;
         found.value = false;
         console.error('Erro ao buscar agendamentos:', error);
-    }
-};
-
-const handlePayment = async (agendamentoId) => {
-
-    if (!confirm('O pagamento será marcado como confirmado. Tem certeza que deseja prosseguir?')) {
-        return;
-    }
-
-    try {
-        const requestData = {
-            status: 'FINALIZADO',
-        };
-
-        await api.put(`/agendamentos/${agendamentoId}`, requestData);
-
-        await fetchAgendamentos();
-    } catch (error) {
-        console.error(error);
     }
 };
 
@@ -127,13 +109,15 @@ onBeforeMount(fetchAgendamentos);
                     </thead>
                     <tbody>
                         <tr v-for="agendamento in agendamentosHoje" :key="agendamento.id_agendamento">
+
                             <td>{{ agendamento.id_agendamento }}</td>
                             <td>{{ agendamento.cliente.nome }}</td>
                             <td>{{ new Date(agendamento.horario_agendamento).toLocaleString() }}</td>
                             <td>{{ agendamento.status }}</td>
                             <td>
                                 <div class="d-flex flex-row justify-content-center gap-2 align-items-end">
-                                    <button @click="handlePayment(agendamento.id_agendamento)"
+                                    <button data-bs-toggle="modal"
+                                        :data-bs-target="'#pagamentoModal' + agendamento.id_agendamento"
                                         class="btn btn-outline-success" title="Finalizar Atendimento"><i
                                             class="bi bi-cash-coin"></i></button>
                                     <button @click="handleConfirmation(agendamento.id_agendamento)"
@@ -144,6 +128,7 @@ onBeforeMount(fetchAgendamentos);
                                             class="bi bi-calendar2-x"></i></button>
                                 </div>
                             </td>
+                            <PagamentoModal :agendamento="agendamento" />
                         </tr>
                     </tbody>
                 </table>
@@ -173,23 +158,27 @@ onBeforeMount(fetchAgendamentos);
                     </thead>
                     <tbody>
                         <tr v-for="agendamento in agendamentosRestantes" :key="agendamento.id_agendamento">
+
                             <td>{{ agendamento.id_agendamento }}</td>
                             <td>{{ agendamento.cliente.nome }}</td>
                             <td>{{ new Date(agendamento.horario_agendamento).toLocaleString() }}</td>
                             <td>{{ agendamento.status }}</td>
                             <td>
                                 <div class="d-flex flex-row justify-content-center gap-2 align-items-end">
-                                    <button @click="handlePayment(agendamento.id_agendamento)"
+                                    <button data-bs-toggle="modal"
+                                        :data-bs-target="'#pagamentoModal' + agendamento.id_agendamento"
                                         class="btn btn-outline-success" title="Finalizar Atendimento"><i
                                             class="bi bi-cash-coin"></i></button>
                                     <button @click="handleConfirmation(agendamento.id_agendamento)"
-                                        class="btn btn-outline-primary" title="Confirmar Agendamento"><i
+                                        class="btn btn-outline-primary" title="Confirmar Agendamento"
+                                        :disabled="agendamento.status === 'CONFIRMADO'"><i
                                             class="bi bi-check-lg"></i></button>
                                     <button @click="handleCancel(agendamento.id_agendamento)"
                                         class="btn btn-outline-danger" title="Cancelar Agendamento"><i
                                             class="bi bi-calendar2-x"></i></button>
                                 </div>
                             </td>
+                            <PagamentoModal :agendamento="agendamento" />
                         </tr>
                     </tbody>
                 </table>
